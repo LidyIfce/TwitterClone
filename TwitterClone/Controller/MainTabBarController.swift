@@ -32,7 +32,7 @@ class MainTabBarController: UITabBarController {
         let navNotifications = templetaNavigationController(image: UIImage(named: "like_unselected"), rootViewController: notifications)
         
         let conversations = ConversationsController()
-        let navConversations = templetaNavigationController(image: UIImage(named: "mail"), rootViewController: conversations)
+        let navConversations = templetaNavigationController(image: UIImage(named: "ic_mail_outline_white_2x-1"), rootViewController: conversations)
         
         viewControllers = [navFeed, navExplore, navNotifications, navConversations]
         
