@@ -23,18 +23,26 @@ class MainTabBarController: UITabBarController {
 
     func configureViewControllers(){
         let feed = FeedController()
-        feed.tabBarItem.image = UIImage(named: "home_unselected")
+        let navFeed = templetaNavigationController(image: UIImage(named: "home_unselected"), rootViewController: feed)
          
         let explore = ExploreController()
-        explore.tabBarItem.image = UIImage(named: "search_unselected")
+        let navExplore = templetaNavigationController(image: UIImage(named: "search_unselected"), rootViewController: explore)
         
         let notifications = NotificationsController()
-        notifications.tabBarItem.image = UIImage(named: "like_unselected")
+        let navNotifications = templetaNavigationController(image: UIImage(named: "like_unselected"), rootViewController: notifications)
         
         let conversations = ConversationsController()
-        conversations.tabBarItem.image = UIImage(named: "mail")
+        let navConversations = templetaNavigationController(image: UIImage(named: "mail"), rootViewController: conversations)
         
-        viewControllers = [feed, explore, notifications, conversations]
+        viewControllers = [navFeed, navExplore, navNotifications, navConversations]
         
     }
+    
+    func templetaNavigationController(image: UIImage?, rootViewController: UIViewController) -> UINavigationController{
+        let nav = UINavigationController(rootViewController: rootViewController)
+        nav.tabBarItem.image = image
+        nav.navigationBar.barTintColor = .white
+        return nav
+    }
+    
 }
