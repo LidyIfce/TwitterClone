@@ -19,9 +19,30 @@ class LoginController:UIViewController{
         return iv
     }()
     
-    private lazy var emailContainerView: UIView = configureContainer(image: #imageLiteral(resourceName: "ic_mail_outline_white_2x-1"), label: "Email")
+    private lazy var emailContainerView: UIView = {
+        let image = #imageLiteral(resourceName: "ic_mail_outline_white_2x-1")
+        let view = Utilities.inputContainerView(withImage: image,textField: emailTextFied)
+        return view
+    }()
        
-    private lazy var passwordContainerView: UIView = configureContainer(image: #imageLiteral(resourceName: "ic_lock_outline_white_2x"), label: "Password")
+    private lazy var passwordContainerView: UIView = {
+        let image = #imageLiteral(resourceName: "ic_lock_outline_white_2x")
+        let view = Utilities.inputContainerView(withImage: image, textField: passwordTextFied)
+        return view
+    }()
+    
+    private let emailTextFied: UITextField = {
+        let tf = Utilities.textField(withPlaceholder: "Email")
+       
+        return tf
+    }()
+    
+    private let passwordTextFied: UITextField = {
+        let tf = Utilities.textField(withPlaceholder: "Placeholder")
+        tf.isSecureTextEntry = true
+           return tf
+       }()
+    
     
     // MARK: - Lifecycle
     
@@ -34,20 +55,6 @@ class LoginController:UIViewController{
     // MARK: - Selectors
     
     // MARK: - Helpers
-    
-    func configureContainer(image:UIImage, label: String) -> UIView{
-        let view = UIView()
-        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        view.backgroundColor = .red
-        
-        let iv = UIImageView()
-        iv.image = image
-        
-        view.addSubview(iv)
-        iv.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,paddingLeft: 8, paddingBottom: 8)
-        iv.setDimensions(width: 24, height: 24)
-        return view
-    }
     
     func configureUI(){
         view.backgroundColor = .twitterBlue
@@ -63,6 +70,6 @@ class LoginController:UIViewController{
         stack.spacing = 8
       
         view.addSubview(stack)
-        stack.anchor(top: logoImageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor)
+        stack.anchor(top: logoImageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 16, paddingRight: 16)
     }
 }
