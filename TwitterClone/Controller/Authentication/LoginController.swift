@@ -38,7 +38,7 @@ class LoginController:UIViewController{
     }()
     
     private let passwordTextFied: UITextField = {
-        let tf = Utilities.textField(withPlaceholder: "Placeholder")
+        let tf = Utilities.textField(withPlaceholder: "Password")
         tf.isSecureTextEntry = true
            return tf
        }()

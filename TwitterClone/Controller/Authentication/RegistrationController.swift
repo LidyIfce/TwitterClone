@@ -40,7 +40,7 @@ class RegistrationController:UIViewController{
           }()
              
           private lazy var usernameContainerView: UIView = {
-              let image = #imageLiteral(resourceName: "ic_lock_outline_white_2x")
+              let image = #imageLiteral(resourceName: "ic_person_outline_white_2x")
               let view = Utilities.inputContainerView(withImage: image, textField: usernameTextFied)
               return view
           }()
@@ -52,7 +52,7 @@ class RegistrationController:UIViewController{
        }()
        
        private let passwordTextFied: UITextField = {
-           let tf = Utilities.textField(withPlaceholder: "Placeholder")
+           let tf = Utilities.textField(withPlaceholder: "Password")
            tf.isSecureTextEntry = true
               return tf
           }()
@@ -64,7 +64,6 @@ class RegistrationController:UIViewController{
           
           private let usernameTextFied: UITextField = {
               let tf = Utilities.textField(withPlaceholder: "Username")
-              tf.isSecureTextEntry = true
                  return tf
              }()
     
