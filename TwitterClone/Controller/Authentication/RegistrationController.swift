@@ -8,11 +8,13 @@
 
 import UIKit
 import Firebase
+
 class RegistrationController:UIViewController{
     
     // MARK: - Properties
     
     private let imagePicker = UIImagePickerController()
+    private var profileImage: UIImage?
     
     private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -101,8 +103,14 @@ class RegistrationController:UIViewController{
     }
     
     @objc func handleRegistration(){
+        guard let profileImage = profileImage else {
+            print("DEBUG: Please select a profile image...")
+            return
+        }
         guard let email = emailTextFied.text else {return}
         guard let password = passwordTextFied.text else {return}
+        guard let username = usernameTextFied.text else {return}
+        guard let fullname = fullNameTextFied.text else {return}
         
         Auth.auth().createUser(withEmail: email, password: password){
             (result, error) in
@@ -111,7 +119,15 @@ class RegistrationController:UIViewController{
                 return
             }
             
-            print("DEBUG: Succesfully! registred user")
+            guard let uid = result?.user.uid else {return}
+            let values = ["email": email, "username": username, "fullName": fullname]
+            let ref = Database.database().reference().child("users").child(uid)
+            ref.updateChildValues(values){
+                (error, ref) in  print("DEBUG: Succesfully! Updated user information...")
+                
+            }
+            
+           
         }
     }
     
@@ -149,6 +165,7 @@ class RegistrationController:UIViewController{
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         guard let profileImage = info[.editedImage] as? UIImage else {return}
+        self.profileImage = profileImage
         self.plusPhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
         plusPhotoButton.layer.cornerRadius = 128 / 2
         plusPhotoButton.layer.masksToBounds = true
