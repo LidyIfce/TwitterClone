@@ -7,6 +7,7 @@ target 'TwitterClone' do
 
   # Pods for TwitterClone
 
+  pod 'Firebase/Analytics'
 	pod 'Firebase/Core'
 	pod 'Firebase/Database'
 	pod 'Firebase/Storage'

@@ -119,8 +119,9 @@ class RegistrationController:UIViewController{
         
             storageRef.putData(imageData, metadata: nil){(meta, error) in
                 storageRef.downloadURL{ (url, error) in
-                guard let profileImageUrl = url?.absoluteString else { return }
-                    
+                    guard let profileImageUrl = url?.absoluteString else { return }
+                
+        
                 Auth.auth().createUser(withEmail: email, password: password){(result, error) in
                     if let error = error{
                         print("DEBUG: Error is \(error.localizedDescription)")
@@ -131,10 +132,8 @@ class RegistrationController:UIViewController{
                     
                 let values = ["email": email, "username": username, "fullName": fullname, "profileImageUrl": profileImageUrl]
                     
-                   
-                              
-                              
-                   REF_USERS.child(uid).updateChildValues(values){
+                
+                    REF_USERS.child(uid).updateChildValues(values){
                        (error, ref) in  print("DEBUG: Succesfully! Updated user information...")
                        
                    }
