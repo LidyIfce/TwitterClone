@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 class RegistrationController:UIViewController{
     
     // MARK: - Properties
@@ -100,7 +101,18 @@ class RegistrationController:UIViewController{
     }
     
     @objc func handleRegistration(){
-        print("handle sign up")
+        guard let email = emailTextFied.text else {return}
+        guard let password = passwordTextFied.text else {return}
+        
+        Auth.auth().createUser(withEmail: email, password: password){
+            (result, error) in
+            if let error = error{
+                print("DEBUG: Error is \(error.localizedDescription)")
+                return
+            }
+            
+            print("DEBUG: Succesfully! registred user")
+        }
     }
     
     @objc func handleAddProfilePhoto(){
